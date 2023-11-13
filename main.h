@@ -13,10 +13,10 @@ extern char **environ;
 #include <signal.h>
 
 void token(char *input, char **argv);
-void execute_command(char** argv, char** env, char* path);
+void execute_command(char **argv, char **env, char *path);
 
 /*=============== HANDLE CTRL+C ============*/
-void sigint_error();
+void sigint_error(void);
 void sigint_handler(int signum);
 
 /*=============== TO HANDLE BUILT IN COMMANDS ============*/
