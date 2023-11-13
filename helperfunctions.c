@@ -1,8 +1,8 @@
 #include "main.h"
 /**
  * token - token to pass
- * input: to pass input
- * argv: argument vector
+ * @input: to pass input
+ * @argv: argument vector
  */
 void token(char *input, char **argv)
 {
@@ -22,40 +22,40 @@ void token(char *input, char **argv)
 
 /**
  * execute_command - To execute the program
- * argv: argument vector
- * env: environment
- * path: the path to pass
+ * @argv: argument vector
+ * @env: environment
+ * @path: the path to pass
  */
 
-void execute_command(char** argv, char** env, char* path)
+void execute_command(char **argv, char **env, char *path)
 {
 	pid_t pid;
 	int status;
 	char* path_dup, *toks, *command_path;
 	struct stat st;
 
-	if (strchr(argv[0], '/') != NULL) 
+	if (strchr(argv[0], '/') != NULL)
 	{
 		pid = fork();
-		if (pid == -1) 
+		if (pid == -1)
 		{
 			perror("Unsuccessful");
 			exit(EXIT_FAILURE);
 		}
-		if (pid == 0) 
+		if (pid == 0)
 		{
-			if (execve(argv[0], argv, env) == -1) 
+			if (execve(argv[0], argv, env) == -1)
 			{
 				perror("Error");
 				exit(EXIT_FAILURE);
 			}
-		} 
-		else 
+		}
+		else
 		{
 			wait(&status);
 			if (WIFEXITED(status))
 			{
-					
+
 			}
 
 		}

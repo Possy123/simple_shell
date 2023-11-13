@@ -2,7 +2,7 @@
 
 /**
  * print_env - print environment
- * env: environment variable
+ * @env:environment variable
  */
 void print_env(char **env)
 {
@@ -17,33 +17,32 @@ void print_env(char **env)
 
 /**
  * exit_command - exit builtin
- * command: that is the command inputted
- * Return: strcmp
+ * @command:that is the command inputted
+ * Return:strcmp
  */
 int exit_command(char *command)
 {
-	return strcmp(command, "exit") == 0;
+	return (strcmp(command, "exit") == 0);
 }
 
 /**
- * signint_handler - to handle ctrl +c error
- * signum: name of variable
+ * sigint_handler - to handle ctrl +c error
+ * @signum: name of variable
  */
-void sigint_handler(int signum) 
+void sigint_handler(int signum)
 {
-  printf("\n");
-exit(EXIT_SUCCESS);
+	printf("\n");
+	exit(EXIT_SUCCESS);
 }
 
 /**
  * sigint_error - to handle the error command in ctrl c
  */
-void sigint_error()
+void sigint_error(void)
 {
-	
-    if (signal(SIGINT, sigint_handler) == SIG_ERR) 
-    {
-        perror("Error setting up signal handler");
-        exit(EXIT_FAILURE);
-    }
+	if (signal(SIGINT, sigint_handler) == SIG_ERR)
+	{
+		perror("Error setting up signal handler");
+		exit(EXIT_FAILURE);
+	}
 }
