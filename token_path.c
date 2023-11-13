@@ -1,15 +1,13 @@
 #include "shell.h"
 /**
  *
- *
  */
 void token(char *lines, char **argv)
 {
 	char *token;
 	char *delim = " \n";
 	int i = 0;
-	/**char *copy = strdup(input);*/
-	
+
 	token = strtok(lines, delim);
 
 	while (token != NULL)

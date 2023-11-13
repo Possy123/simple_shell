@@ -1,6 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#define  BUFFER_SIZE 1024
+
 extern char **environ;
 
 #include <stdio.h>
@@ -14,7 +16,7 @@ extern char **environ;
 
 void token(char *input, char **argv);
 void execute_command(char** argv, char** env, char* path);
-
+char *my_getline();
 /*=============== HANDLE CTRL+C ============*/
 void sigint_error();
 void sigint_handler(int signum);

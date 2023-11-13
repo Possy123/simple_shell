@@ -2,16 +2,12 @@
 /**
  *
  */
+/*extern char **environ;*/
 
 /*vioid execute_line(char *lines, char **argv, char **envp)*/
-extern char **environ;
-
-void execute_line(char *lines, char *envp[])
+void execute_line(char *lines)
 {
 	char *argv[32];
-	/*char *envp[] = {NULL};*/
-
-	unsigned int i;
 
 	token(lines, argv);
 
@@ -27,64 +23,41 @@ void execute_line(char *lines, char *envp[])
 
 	if (new_pid == 0)
 	{
-
-		/*for (char **env = environ; *env != NULL; env++)
-                {
-                        printf("%s\n", *env);
-                }*/
-		/*if (strcmp(argv[0], "exit") == 0)
-		{
-			exit(0);
-		}*/
-		/**char *envp[] = {NULL}*/
-
-		/*if (execve(argv[0],argv, environ) == -1)
-		{
-			perror("execve issues");
-			exit(1);
-		}*/
-
 		/*token(lines, argv);*/
 
 		/*for (char **env = environ; *env != NULL; env++)
 		{
 			printf("%s\n", *env);
-		}*/
+		}
 
 
-		/*int argc = 0;*/
+		int argc = 0;*/
 
-
-
-		token(lines, argv);
-		search_exe(argv[0], argv,envp);
+		/*token(lines, argv);*/
 
 		/*argv[0] = (char *)lines;
 		argv[1] = NULL;*/
 
-		/**token(lines, argv);
-		char *path_var = getenv("PATH");
+		/*token(lines, argv);*/
+		/**char *path_var = getenv("PATH");*/
 
-		if (path_var != NULL)
+		/**if (path_var != NULL)
 		{
 			printf("PATH: %s\n", path_var);
 		}
 		else
 		{
 			printf("PATH environment not set\n");
-		}
-		
+		}*/
 
 		if (execve(argv[0], argv, NULL) == -1)
-		if (execve(lines, argv, NULL) == -1)
+		/**if (execve(lines, argv, NULL) == -1)*/
 		{
 			perror("execve");
-			free(line_ptr);
-			fprintf(stderr, "Command not found: %s\n", argv[0]);
+			/**fprintf(stderr, "Command not found: %s\n", lines);*/
 			exit(1);
-		}*/
+		}
 	}
-
 	else
 	{
 		int status;
@@ -144,7 +117,20 @@ int main(int argc, char *argv[], char *envp[])
 		/*token(line_ptr, argv);*/
 
 		/*char *envp[] = {"MY_VARIABLE=my_value", NULL};*/
-		execute_line(line_ptr);
+		pid_t new = fork();
+
+		if (new == -1)
+		{
+			perror("fork issues");
+			free(line_ptr);
+			exit(1);
+		}
+		if (new == 0)
+		{
+			execve(argv[0], argv, envp);
+			 if (execv
+			
+
 	}
 	free(line_ptr);
 
