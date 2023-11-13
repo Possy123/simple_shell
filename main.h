@@ -13,7 +13,9 @@ extern char **environ;
 #include <signal.h>
 
 void token(char *input, char **argv);
-void execute_command(char **argv, char **env, char *path);
+void execute_command(char** argv, char** env);
+void execute_path(char** argv, char** env, char* path);
+void execute_c(char **argv, char **env);
 
 /*=============== HANDLE CTRL+C ============*/
 void sigint_error(void);
