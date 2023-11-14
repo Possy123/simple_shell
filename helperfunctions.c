@@ -47,6 +47,7 @@ void execute_c(char **argv, char **env)
 {
 	pid_t pid;
 	int status;
+
 	pid = fork();
 	if (pid == -1)
 	{
@@ -78,6 +79,7 @@ void execute_path(char **argv, char **env, char *path)
 {
 	char *toks, *path_dup;
 	char *command_path;
+	struct stat st;
 
 	path = getenv("PATH");
 	if (path != NULL)
@@ -93,9 +95,14 @@ void execute_path(char **argv, char **env, char *path)
 			strcat(command_path, argv[0]);
 			strcat(command_path, "\0");
 
-			commandpath(argv, env, command_path);
+			if (stat(command_path, &st) == 0)
+			{
 
+				commandpath(argv, env, command_path);
+				break;
+			}
 
+			free(command_path);
 			toks = strtok(NULL, ":");
 		}
 		free(command_path);
@@ -103,39 +110,38 @@ void execute_path(char **argv, char **env, char *path)
 	}
 }
 
-
+/**
+ * commandpath - Command path
+ * @argv: argument vector
+ * @env: environment variable
+ * @command_path: command path
+ */
 void commandpath(char **argv, char **env, char *command_path)
 {
-	struct stat st;
 	pid_t pid;
 	int status;
 
-	if (stat(command_path, &st) == 0)
+	pid = fork();
+	if (pid == -1)
 	{
-		pid = fork();
-		if (pid == -1)
+		perror("Unsuccessful");
+		exit(EXIT_FAILURE);
+	}
+	if (pid == 0)
+	{
+		if (execve(command_path, argv, env) == -1)
 		{
-			perror("Unsuccessful");
+			perror("Error");
+			free(command_path);
 			exit(EXIT_FAILURE);
 		}
-		if (pid == 0)
+	}
+	else
+	{
+		wait(&status);
+		if (WIFEXITED(status) == 0)
 		{
-			if (execve(command_path, argv, env) == -1)
-			{
-				perror("Error");
-				free(command_path);
-				exit(EXIT_FAILURE);
-			}
 		}
-		else
-		{
-			wait(&status);
-			if (WIFEXITED(status) == 0);
-			{
-				free(command_path);
-				return;
-			}
-		}
-		free(command_path);
 	}
 }
+
