@@ -31,6 +31,7 @@ int exit_command(char *command)
  */
 void sigint_handler(int signum)
 {
+	(void)signum;
 	printf("\n");
 	exit(EXIT_SUCCESS);
 }

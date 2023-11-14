@@ -47,7 +47,7 @@ char *my_getline()
 	return (text);
 }
 
-
+/*
 int main()
 {
 	while (1)
@@ -59,6 +59,7 @@ int main()
 
 		/*free(input);*/
 
-	}
+	/*
 	return (0);
 }
+*/

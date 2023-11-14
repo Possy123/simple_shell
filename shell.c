@@ -8,10 +8,9 @@
  */
 int main(int ac, char **argv, char **env)
 {
-	char *path = getenv("PATH");
-
 	char *buffer = NULL;
 	size_t bufsize = 0;
+	(void)ac;
 
 	sigint_error();
 
@@ -39,7 +38,7 @@ int main(int ac, char **argv, char **env)
 			continue;
 		}
 
-			execute_command(argv, env, path);
+			execute_command(argv, env);
 
 		free(argv);
 	}
