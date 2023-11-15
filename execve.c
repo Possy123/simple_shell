@@ -2,7 +2,7 @@
 
 /**
  * execute_command - execute command
- * @command: command
+ * @line_ptr: command
  */
 void execute_command(char *line_ptr)
 {
