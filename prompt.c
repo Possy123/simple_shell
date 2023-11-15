@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("$ ");
+			write(1, "$ ", 2);
 		readlines = getline(&line_ptr, &bufsize, stdin);
 
 		if (readlines == -1)
