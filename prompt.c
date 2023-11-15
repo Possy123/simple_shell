@@ -21,7 +21,7 @@ int main(void)
 
 		if (readlines == -1)
 		{
-			printf("\n");
+			/*printf("\n");*/
 			/*perror("getline");*/
 			free(line_ptr);
 			exit(EXIT_FAILURE);
