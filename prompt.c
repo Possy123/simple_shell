@@ -9,7 +9,7 @@ int main(void)
 	char *line_ptr = NULL;
 	size_t bufsize = 0;
 	ssize_t readlines;
-	unsigned int i;
+/*	unsigned int i;*/
 
 	/*char *argv[] = {"bin/ls", "-l", "/tmp", NULL};*/
 
