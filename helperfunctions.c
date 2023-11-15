@@ -7,7 +7,7 @@
 void token(char *input, char **argv)
 {
 	char *tokenizer;
-	char *delim = " \n";
+	char *delim = " \0";
 	int a = 0;
 
 	tokenizer = strtok(input, delim);
