@@ -7,7 +7,8 @@
 void execute_command(char *line_ptr)
 {
 	pid_t pid;
-	char *args[] = {line_ptr, NULL};
+
+	char *args[2];
 	int status;
 
 	pid = fork();
@@ -18,18 +19,18 @@ void execute_command(char *line_ptr)
 	}
 	else if (pid == 0)
 	{
+		args[0] = line_ptr;
+		args[1] = NULL;
+
 		if (execve(line_ptr, args, environ) == -1)
 		{
 			perror("Error: command not found");
+			free(line_ptr);
 			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
 		wait(&status);
-		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-		{
-			fprintf(stderr, "Error: command exited with status %d\n", WEXITSTATUS(status));
-		}
 	}
 }
