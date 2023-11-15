@@ -2,9 +2,10 @@
 
 /**
  * execute_command - execute command
- * @line_ptr: command
+ * @command: command
+ * @program: the program's name
  */
-void execute_command(char *line_ptr)
+void execute_command(char *command, char *program)
 {
 	pid_t pid;
 
@@ -19,13 +20,13 @@ void execute_command(char *line_ptr)
 	}
 	else if (pid == 0)
 	{
-		args[0] = line_ptr;
+		args[0] = command;
 		args[1] = NULL;
 
-		if (execve(line_ptr, args, environ) == -1)
+		if (execve(command, args, NULL) == -1)
 		{
-			perror("Error: command not found");
-			free(line_ptr);
+			perror(program);
+			free(command);
 			exit(EXIT_FAILURE);
 		}
 	}

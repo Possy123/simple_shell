@@ -1,17 +1,22 @@
 #include "shell.h"
 /**
  * main - Entry point of program
+ * @argc: the argument count
+ * @argv: argument vector
  *
  * Return: 0 on sucess
  */
-int main(void)
+int main(int argc, char *argv[])
 {
 	char *line_ptr = NULL;
 	size_t bufsize = 0;
 	ssize_t readlines;
-/*	unsigned int i;*/
 
-	/*char *argv[] = {"bin/ls", "-l", "/tmp", NULL};*/
+	if (argc < 1)
+	{
+		perror(argv[0]);
+		exit(EXIT_FAILURE);
+	}
 
 	while (1)
 	{
@@ -21,8 +26,6 @@ int main(void)
 
 		if (readlines == -1)
 		{
-			/*printf("\n");*/
-			/*perror("getline");*/
 			free(line_ptr);
 			exit(EXIT_FAILURE);
 		}
@@ -30,7 +33,7 @@ int main(void)
 		{
 			line_ptr[readlines - 1] = '\0';
 		}
-		execute_command(line_ptr);
+		execute_command(line_ptr, argv[0]);
 	}
 	free(line_ptr);
 

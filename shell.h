@@ -12,5 +12,5 @@ extern char **environ;
 #include <sys/stat.h>
 #include <signal.h>
 
-void execute_command(char *line_ptr);
+void execute_command(char *command, char *program);
 #endif
