@@ -21,13 +21,21 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(1, "$ ", 2);
+			printf("$ ");
 		readlines = getline(&line_ptr, &bufsize, stdin);
 
 		if (readlines == -1)
 		{
-			free(line_ptr);
-			exit(EXIT_FAILURE);
+			if (feof(stdin))
+			{
+				printf("\n");
+				break;
+			}
+			else
+			{
+				perror("error reading input");
+				break;
+			}
 		}
 		if (readlines > 0 && line_ptr[readlines - 1] == '\n')
 		{
