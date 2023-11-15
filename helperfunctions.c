@@ -58,6 +58,7 @@ void execute_c(char **argv, char **env)
 	{
 		if (execve(argv[0], argv, env) == -1)
 		{
+			/*fprintf(stderr, "%s: 1: %s: not found\n", argv[0], argv[0]);*/
 			perror("Error");
 			exit(EXIT_FAILURE);
 		}
